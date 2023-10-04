@@ -17,7 +17,7 @@ defineProps({
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      <p id="idpm" :class="pm" name="p">my index may be you will doing great and best i gees!</p>
+      <p id="idpm" :class="pm" name="p">my index may be you will doing great and best i gees !</p>
       <!-- You’ve successfully created a project with
             <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
             <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. -->
