@@ -23,6 +23,11 @@ defineProps({
             <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. -->
     </h3>
   </div>
+  <div>
+    <div>
+        <img alt="Vue logo" class="logo" src="../assets/logo.svg" width="100" height="100" />
+    </div>
+  </div>
 </template>
 
 <style scoped>

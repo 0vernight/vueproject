@@ -24,6 +24,15 @@ window.onload =()=> {
     // p.textContent="哈哈哈哈";
     // p.insertBefore(el);
 
+    let i = 0;
+    let timer = setInterval(() => {
+        ++i;
+        if (i < 10) {
+            console.log("interval=" + i);
+        } else {
+            clearInterval(timer);
+        }
+    }, 1000);
 
 }
 // const promise =new Promise((resolve, reject) => {
