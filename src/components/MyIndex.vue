@@ -8,10 +8,22 @@
 import { computed, defineComponent, onMounted, onServerPrefetch, reactive, ref, watch } from 'vue'
 
 // import SupportIcon from './icons/IconSupport.vue'
+//就是prop里的擦书需要在引用该组件时提供的参数
+//需要使用驼峰命名
 defineProps({
   msg: {
     type: String,
     required: true
+    },
+    myObj: {
+        type: Object,
+        required:false
+  },
+  setup: () => {
+    
+    return {
+        msg: String
+    }
   }
 })
 defineComponent({
@@ -110,11 +122,13 @@ watch(question, async (newQuestion, oldQuestion) => {
   }
 }, { immediate: true, deep: true })
 
+
+
 </script>
 
 <template>
   <div class="greetings">
-    <!-- <h1 class="green">{{ msg }}</h1> -->
+    <h3 class="green">{{ msg }}</h3>
     <h3>
       <p id="idpm" :class="pm" name="p">myindex may be you will doing great and best i gees !</p>
       <!-- You’ve successfully created a project with
@@ -174,6 +188,7 @@ watch(question, async (newQuestion, oldQuestion) => {
     </div>
   </div>
 </template>
+
 
 
 <style scoped>

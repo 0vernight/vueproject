@@ -1,23 +1,28 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
-// import TheWelcome from './components/TheWelcome.vue'
+import TheWelcome from './components/TheWelcome.vue'
 import MyIndex from './components/MyIndex.vue'
-
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    
+
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
   </header>
 
   <main>
-    <!-- <TheWelcome /> -->
-    <MyIndex />
+    <div class="wrapper">
+      <MyIndex msg="app give the val msg for myindex" />
+      <TheWelcome />
+    </div>
   </main>
+
+  <!-- <aside>
+    <div>aside</div>
+  </aside> -->
 </template>
 
 <style scoped>
