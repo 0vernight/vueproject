@@ -8,34 +8,32 @@ import App from './App.vue'
 
 createApp(App).mount('#app')
 
+// App.components()
 
+window.onload = () => {
+  let el = document.getElementsByClassName('green')
+  el.value = 'tiaozhuan'
+  console.log('myconsole=' + el)
+  let pc = document.getElementsByClassName('.pm')
+  let pi = document.getElementById('idpm')
+  console.log('class =' + pc)
+  console.log('id =' + pi)
+  //pc.style ="red";
+  pi.style.color = 'white'
+  pi.style.backgroundColor = 'green'
+  // let p = document.createElement("p");
+  // p.textContent="哈哈哈哈";
+  // p.insertBefore(el);
 
-window.onload =()=> {
-    
-    let el = document.getElementsByClassName("green");
-    el.value = "tiaozhuan";
-    console.log('myconsole=' + el)
-    let pc = document.getElementsByClassName(".pm");
-    let pi = document.getElementById("idpm");
-    console.log("class =" + pc  );
-    console.log("id ="+  pi );
-    //pc.style ="red";
-    pi.style.color = 'white';
-    pi.style.backgroundColor = 'green';
-    // let p = document.createElement("p");
-    // p.textContent="哈哈哈哈";
-    // p.insertBefore(el);
-
-    let i = 0;
-    let timer = setInterval(() => {
-        ++i;
-        if (i < 10) {
-            console.log("interval=" + i);
-        } else {
-            clearInterval(timer);
-        }
-    }, 1000);
-
+  let i = 0
+  let timer = setInterval(() => {
+    ++i
+    if (i < 3) {
+      console.log('interval=' + i)
+    } else {
+      clearInterval(timer)
+    }
+  }, 1000)
 }
 // const promise =new Promise((resolve, reject) => {
 

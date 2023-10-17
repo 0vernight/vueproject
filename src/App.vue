@@ -2,6 +2,11 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import MyIndex from './components/MyIndex.vue'
+import HomeView from './components/HomeView.vue'
+
+const callback = (n) => {
+  console.log('callback in the app log screan! parms=' + n)
+}
 </script>
 
 <template>
@@ -15,10 +20,13 @@ import MyIndex from './components/MyIndex.vue'
 
   <main>
     <div class="wrapper">
-      <MyIndex msg="app give the val msg for myindex" />
-      <TheWelcome />
+      <MyIndex msg="app give the val msg for myindex" @someEvent="callback" />
+      <!-- <TheWelcome /> -->
     </div>
   </main>
+  <footer>
+    <!-- <HomeView></HomeView> -->
+  </footer>
 
   <!-- <aside>
     <div>aside</div>

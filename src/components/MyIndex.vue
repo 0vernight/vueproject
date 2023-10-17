@@ -3,29 +3,49 @@
 // import DocumentationIcon from './icons/IconDocumentation.vue'
 // import ToolingIcon from './icons/IconTooling.vue'
 // import EcosystemIcon from './icons/IconEcosystem.vue'
-// import CommunityIcon from './icons/IconCommunity.vue'
+import CustomInput from './CustomInput.vue'
+import HomeView from './HomeView.vue'
 
-import { computed, defineComponent, onMounted, onServerPrefetch, reactive, ref, watch } from 'vue'
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onServerPrefetch,
+  reactive,
+  ref,
+  useAttrs,
+  watch
+} from 'vue'
+import { Check, Delete, Edit, Message, Search, Star } from '@element-plus/icons-vue'
 
 // import SupportIcon from './icons/IconSupport.vue'
 //就是prop里的擦书需要在引用该组件时提供的参数
-//需要使用驼峰命名
+//需要使用驼峰命名,传入时注意使用
+// 第一种方式
+// const props = defineProps(['foo'])
+// 第二种方式
+// defineProps({
+//   title: String,
+//   likes: Number
+// })
+// 静态 vs. 动态 Prop   相应地，还有使用 v-bind 或缩写 : 来进行动态绑定的 props
 defineProps({
   msg: {
-    type: String,
-    required: true
-    },
-    myObj: {
-        type: Object,
-        required:false
+    type: [String, Number],
+    required: true,
+    default: 'myIndex default for this!'
+  },
+  myObj: {
+    type: Object,
+    required: false
   },
   setup: () => {
-    
     return {
-        msg: String
+      msg: String
     }
   }
 })
+
 defineComponent({
   name: 'MyIndex',
   components: {
@@ -65,6 +85,8 @@ const myObject = reactive({
 })
 function say(message) {
   alert(message)
+  this.msg = message
+  console.log(this.msg)
 }
 function warn(message, event) {
   // 这里可以访问原生事件,有时我们需要在内联事件处理器中访问原生 DOM 事件$event
@@ -91,7 +113,7 @@ onServerPrefetch(async () => {
   // 在服务器上预抓取数据，因为它比在客户端上更快。
   //   data.value = await fetchOnServer(/* ... */)
 })
-const refel = ref(null);
+const refel = ref(null)
 onMounted(async () => {
   console.log('mounted hasbeen onladed!')
   if (!data.value) {
@@ -99,36 +121,43 @@ onMounted(async () => {
     // 是在客户端动态渲染的。将转而执行
     // 另一个客户端侧的抓取请求
     // data.value = await fetchOnClient(/* ... */)
-    }
-    if (refel.value) {
-        (refel.value as any).focus();
-    }
+  }
+  if (refel.value) {
+    ;(refel.value as any).focus()
+  }
 })
 //侦听
 const question = ref('')
 const answer = ref('Questions usually contain a question mark. ;-)')
 
 // 可以直接侦听一个 ref
-watch(question, async (newQuestion, oldQuestion) => {
-    console.log("oldqusntion="+oldQuestion);
-  if (newQuestion.indexOf('?') > -1) {
-    answer.value = 'Thinking...'
-    try {
-      const res = await fetch('https://yesno.wtf/api')
-      answer.value = (await res.json()).answer
-    } catch (error) {
-      answer.value = 'Error! Could not reach the API. ' + error
+watch(
+  question,
+  async (newQuestion, oldQuestion) => {
+    console.log('oldqusntion=' + oldQuestion)
+    if (newQuestion.indexOf('?') > -1) {
+      answer.value = 'Thinking...'
+      try {
+        const res = await fetch('https://yesno.wtf/api')
+        answer.value = (await res.json()).answer
+      } catch (error) {
+        answer.value = 'Error! Could not reach the API. ' + error
+      }
     }
-  }
-}, { immediate: true, deep: true })
+  },
+  { immediate: true, deep: true }
+)
+// 调用给父组件的emits事件,触发与监听事件
+const emit = defineEmits(['someEvent', 'callback', 'callduty'])
+emit('someEvent', 'callback', 'callduty')
 
-
-
+const searchText = ref('input some search text in here !')
+const attrs = useAttrs()
 </script>
 
 <template>
   <div class="greetings">
-    <h3 class="green">{{ msg }}</h3>
+    <h3 @click="$emit('someEvent', 20)" class="green">{{ msg }} {{ attrs }}</h3>
     <h3>
       <p id="idpm" :class="pm" name="p">myindex may be you will doing great and best i gees !</p>
       <!-- You’ve successfully created a project with
@@ -179,9 +208,23 @@ watch(question, async (newQuestion, oldQuestion) => {
     </p>
     <p>{{ answer }}</p>
 
-    <input  ref="refel" placeholder="refel" />
+    <input ref="refel" placeholder="refel" />
   </div>
 
+  <div>
+    <CustomInput v-model:model-value="searchText" aria-placeholder="searchText">
+      <template v-slot:header="{ count }">
+        <span>Fallthrough attribute: {{ $attrs }} {{ (this.state = count) }}</span>
+      </template>
+      <template v-slot:footer>
+        <span>{{ this.state }}</span>
+      </template>
+    </CustomInput>
+  </div>
+
+  <template>
+    <HomeView modelValue=" in myindex view ">my HomeView in here </HomeView>
+  </template>
   <div>
     <div>
       <!-- <img alt="Vue logo" class="logo" src="../assets/logo.svg" width="100" height="100" /> -->
@@ -192,6 +235,26 @@ watch(question, async (newQuestion, oldQuestion) => {
 
 
 <style scoped>
+.demonstration {
+  color: var(--el-text-color-secondary);
+}
+
+.el-carousel__item h3 {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+  text-align: center;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+
 .active {
   background-color: aquamarine;
 }

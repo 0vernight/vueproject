@@ -7,9 +7,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "elmentUI": "npm i element-ui -S"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "echarts": "^5.4.3",
+    "vue-router": "^4.2.5",
     "vue": "^3.3.4"
   },
   "devDependencies": {
